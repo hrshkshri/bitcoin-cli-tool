@@ -6,7 +6,6 @@ const listWallets = require("./src/wallet/list");
 const getBalance = require("./src/api/getBalance");
 const getTransactions = require("./src/api/getTransactions");
 const generateAddress = require("./src/api/generateAddress");
-const generateMultisigAddress = require("./src/api/generateMultisigAddress");
 
 class BitcoinCLI extends Command {
   async run() {
@@ -31,11 +30,6 @@ class BitcoinCLI extends Command {
       } else if (flags.generateAddress) {
         this.log(`Generating address for wallet: ${flags.generateAddress}`);
         await generateAddress(flags.generateAddress);
-      } else if (flags.generateMultisig) {
-        this.log(
-          `Generating multisig address for wallet: ${flags.generateMultisig}`
-        );
-        await generateMultisigAddress(flags.generateMultisig); // No need for pubkeys flag now
       } else {
         this.log(
           "Use a valid flag: --create, --import, --list, --balance, --transactions, --generateAddress, --generateMultisig"
@@ -63,10 +57,6 @@ BitcoinCLI.flags = {
   generateAddress: flags.string({
     char: "g",
     description: "Generate a new address for the wallet",
-  }),
-  generateMultisig: flags.string({
-    char: "M",
-    description: "Generate a new multisig address for the wallet",
   }),
 };
 

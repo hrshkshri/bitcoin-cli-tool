@@ -17,5 +17,18 @@
       "mgMYQT4bxSYcbgzkY4awrujncsqVYYJVzW",
       "n2qSYmSgCyGFCrEHQuCJEY54gBwszjrtVi"
     ]
+  },
+  "one": {
+    "mnemonic": "cotton build actress circle sell outside glare orient foot satoshi basket impact"
+  },
+  "two": {
+    "mnemonic": "lottery neck quiz glory rack keep now army begin empty limit gravity"
+  },
+  "demo": {
+    "mnemonic": "element critic later gallery twist joy fringe mosquito hospital timber mom lion",
+    "addresses": [
+      "mzVgjTK8WupXAbTGjKLD3aGqLS7oJzFmaa",
+      "n4C1NWW7hF2KqD9FxJb86aTXC7PKJu8LAk"
+    ]
   }
 }

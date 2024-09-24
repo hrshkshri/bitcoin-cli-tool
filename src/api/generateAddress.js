@@ -5,6 +5,7 @@ const BIP32Factory = require("bip32").default;
 const ecc = require("tiny-secp256k1");
 const fs = require("fs");
 const path = require("path");
+const { loadWallets, saveWallets } = require("../wallet/walletLoader");
 
 const bip32 = BIP32Factory(ecc);
 const walletsFile = path.join(__dirname, "../../wallets.json");
@@ -54,17 +55,6 @@ const generateAddress = async (walletName) => {
   } catch (error) {
     console.error("Error generating or adding address:", error.message);
   }
-};
-
-const loadWallets = () => {
-  if (!fs.existsSync(walletsFile)) {
-    return {};
-  }
-  return JSON.parse(fs.readFileSync(walletsFile));
-};
-
-const saveWallets = (wallets) => {
-  fs.writeFileSync(walletsFile, JSON.stringify(wallets, null, 2));
 };
 
 module.exports = generateAddress;

@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const postWallet = require("../api/postWallet");
 const walletsFile = path.join(__dirname, "../../wallets.json");
+const { loadWallets, saveWallets } = require("./walletLoader");
 
 const createWallet = async (walletName) => {
   const mnemonic = bip39.generateMnemonic();
@@ -29,17 +30,6 @@ const createWallet = async (walletName) => {
   console.log(
     `Wallet "${walletName}" saved locally with mnemonic. ${mnemonic}, please add address to wallet.`
   );
-};
-
-const loadWallets = () => {
-  if (!fs.existsSync(walletsFile)) {
-    return {};
-  }
-  return JSON.parse(fs.readFileSync(walletsFile));
-};
-
-const saveWallets = (wallets) => {
-  fs.writeFileSync(walletsFile, JSON.stringify(wallets, null, 2));
 };
 
 module.exports = createWallet;

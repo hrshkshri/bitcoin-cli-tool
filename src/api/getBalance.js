@@ -2,7 +2,6 @@ const axios = require("axios");
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
-const loadWallets = require("../wallet/walletLoader");
 
 const walletsFile = path.join(__dirname, "../../wallets.json");
 
@@ -40,6 +39,13 @@ const getBalance = async (walletName) => {
   }
 
   console.log(`Total balance for wallet "${walletName}": ${totalBalance} BTC`);
+};
+
+const loadWallets = () => {
+  if (!fs.existsSync(walletsFile)) {
+    return {};
+  }
+  return JSON.parse(fs.readFileSync(walletsFile));
 };
 
 module.exports = getBalance;

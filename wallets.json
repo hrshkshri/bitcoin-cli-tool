@@ -9,7 +9,17 @@
   "test": {
     "mnemonic": "endorse sphere judge sense stable match salute rifle vibrant entry slot dose",
     "addresses": [
-      "mzGgFFz1FwS5et2rSEnjC99Zv9aZRF2GTW"
+      "mzGgFFz1FwS5et2rSEnjC99Zv9aZRF2GTW",
+      "mn5fqs51ZGSdKiAu2MdtiShjYJgSHcChuW"
     ]
+  },
+  "dummy": {
+    "mnemonic": "glory economy false donor infant wage wreck sentence egg tag note hundred",
+    "addresses": [
+      "myPWLLVpc2S2t7f1jZnVH9DhD2trwE3SHe"
+    ]
+  },
+  "name": {
+    "mnemonic": "dsgjsdgvs sdvs"
   }
 }

@@ -23,7 +23,7 @@ const generateAddress = async (walletName) => {
     const response = await axios.post(
       "https://api.blockcypher.com/v1/btc/test3/addrs"
     );
-
+    
     const newAddress = response.data.address;
 
     // Initialize addresses array if it doesn't exist

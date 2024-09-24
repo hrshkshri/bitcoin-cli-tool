@@ -1,7 +1,7 @@
-const axios = require("axios"); // Make sure to import axios
 const bip39 = require("bip39");
 const fs = require("fs");
 const path = require("path");
+const postWallet = require("../api/postWallet");
 const walletsFile = path.join(__dirname, "../../wallets.json");
 
 const createWallet = async (walletName) => {
@@ -15,31 +15,20 @@ const createWallet = async (walletName) => {
   wallets[walletName] = walletData;
   saveWallets(wallets);
 
+  // Post the wallet to BlockCypher
   try {
-    // Post the wallet to BlockCypher
-    const response = await axios.post(
-      `https://api.blockcypher.com/v1/btc/test3/wallets?token=${process.env.BLOCKCYPHER_API_KEY}`,
-      {
-        name: walletName,
-        mnemonic: mnemonic,
-      },
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-
+    const response = await postWallet(walletName, mnemonic);
     console.log(
       `Wallet "${walletName}" created on BlockCypher:`,
       response.data
     );
-
-    saveWallets(wallets);
-    console.log(
-      `Wallet "${walletName}" saved locally with mnemonic. ${mnemonic}, please add address to wallet.`
-    );
   } catch (error) {
     console.error("Error creating wallet on BlockCypher:", error.message);
   }
+
+  console.log(
+    `Wallet "${walletName}" saved locally with mnemonic. ${mnemonic}, please add address to wallet.`
+  );
 };
 
 const loadWallets = () => {

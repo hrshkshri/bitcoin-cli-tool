@@ -32,7 +32,7 @@ class BitcoinCLI extends Command {
         await generateAddress(flags.generateAddress);
       } else {
         this.log(
-          "Use a valid flag: --create, --import, --list, --balance, --transactions, --generateAddress, --generateMultisig"
+          "Use a valid flag: --create, --import, --list, --balance, --transactions, --generateAddress"
         );
       }
     } catch (error) {

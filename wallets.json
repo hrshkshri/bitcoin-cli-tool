@@ -1,0 +1,14 @@
+{
+  "MyWallet": {
+    "mnemonic": "source gospel cement pill buffalo drop novel chase choice trouble lion dog",
+    "addresses": [
+      "mwb5HQJvRgMAMtXGWGqRLjumKktFfJWzcB"
+    ]
+  },
+  "hello": {
+    "mnemonic": "slogan scrap ice region dry survey side forget alert split excuse rookie",
+    "addresses": [
+      "mtk22KrjanwDofgbjG61k1b687DEYNRHZW"
+    ]
+  }
+}

@@ -1,37 +1,9 @@
 {
-  "MyWallet": {
-    "mnemonic": "source gospel cement pill buffalo drop novel chase choice trouble lion dog",
-    "addresses": [
-      "mwb5HQJvRgMAMtXGWGqRLjumKktFfJWzcB"
-    ]
-  },
-  "hello": {
-    "mnemonic": "slogan scrap ice region dry survey side forget alert split excuse rookie",
-    "addresses": [
-      "mtk22KrjanwDofgbjG61k1b687DEYNRHZW"
-    ]
-  },
-  "multi": {
-    "mnemonic": "flame small author monster edit later figure usual wealth rail cliff cloth",
-    "addresses": [
-      "mgMYQT4bxSYcbgzkY4awrujncsqVYYJVzW",
-      "n2qSYmSgCyGFCrEHQuCJEY54gBwszjrtVi"
-    ]
-  },
-  "one": {
-    "mnemonic": "cotton build actress circle sell outside glare orient foot satoshi basket impact"
-  },
-  "two": {
-    "mnemonic": "lottery neck quiz glory rack keep now army begin empty limit gravity"
-  },
   "demo": {
     "mnemonic": "element critic later gallery twist joy fringe mosquito hospital timber mom lion",
     "addresses": [
       "mzVgjTK8WupXAbTGjKLD3aGqLS7oJzFmaa",
       "n4C1NWW7hF2KqD9FxJb86aTXC7PKJu8LAk"
     ]
-  },
-  "hello2": {
-    "mnemonic": "source gospel cement pill buffalo drop novel chase choice trouble lion dog"
   }
 }

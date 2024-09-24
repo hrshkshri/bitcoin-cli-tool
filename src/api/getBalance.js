@@ -15,27 +15,30 @@ const getBalance = async (walletName) => {
     throw new Error(`Wallet "${walletName}" not found.`);
   }
 
-  if (!wallet.addresses) {
-    throw new Error(`No address found for wallet "${walletName}".`);
+  if (!wallet.addresses || wallet.addresses.length === 0) {
+    throw new Error(`No addresses found for wallet "${walletName}".`);
   }
 
   const apiKey = process.env.BLOCKCYPHER_API_KEY;
-  console.log(
-    `Fetching balance for wallet "${walletName}" with address "${wallet.address}"...`
-  );
+  let totalBalance = 0;
 
-  const url = `https://api.blockcypher.com/v1/btc/test3/addrs/${wallet.address}/balance?token=${apiKey}`;
+  for (const address of wallet.addresses) {
+    console.log(`Fetching balance for address "${address}"...`);
+    const url = `https://api.blockcypher.com/v1/btc/test3/addrs/${address}/balance?token=${apiKey}`;
 
-  try {
-    const response = await axios.get(url);
-    console.log(
-      `Balance for wallet "${walletName}": ${
-        response.data.final_balance / 100000000
-      } BTC`
-    );
-  } catch (error) {
-    console.error("Error fetching balance:", error.message);
+    try {
+      const response = await axios.get(url);
+      const balance = response.data.final_balance / 100000000; // Convert satoshis to BTC
+      totalBalance += balance;
+      console.log(`Balance for address "${address}": ${balance} BTC`);
+    } catch (error) {
+      console.error(
+        `Error fetching balance for address "${address}": ${error.message}`
+      );
+    }
   }
+
+  console.log(`Total balance for wallet "${walletName}": ${totalBalance} BTC`);
 };
 
 const loadWallets = () => {

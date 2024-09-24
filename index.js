@@ -1,5 +1,7 @@
 require("dotenv").config();
 const { Command, flags } = require("@oclif/command");
+const inquirer = require("inquirer");
+
 const createWallet = require("./src/wallet/create");
 const importWallet = require("./src/wallet/import");
 const listWallets = require("./src/wallet/list");
@@ -31,12 +33,81 @@ class BitcoinCLI extends Command {
         this.log(`Generating address for wallet: ${flags.generateAddress}`);
         await generateAddress(flags.generateAddress);
       } else {
-        this.log(
-          "Use a valid flag: --create, --import, --list, --balance, --transactions, --generateAddress"
-        );
+        // If no flags are provided, start interactive mode
+        await this.showInteractivePrompt();
       }
     } catch (error) {
       this.log(`Error: ${error.message}`);
+    }
+  }
+
+  async showInteractivePrompt() {
+    const answers = await inquirer.prompt([
+      {
+        type: "list",
+        name: "action",
+        message: "Select an action:",
+        choices: [
+          { name: "Create a new wallet", value: "create" },
+          { name: "Import a wallet from mnemonic", value: "import" },
+          { name: "List all wallets", value: "list" },
+          { name: "Get balance of a wallet", value: "balance" },
+          { name: "Get transactions of a wallet", value: "transactions" },
+          {
+            name: "Generate a new address for a wallet",
+            value: "generateAddress",
+          },
+        ],
+      },
+      {
+        type: "input",
+        name: "walletName",
+        message: "Enter the wallet name:",
+        when: (answers) =>
+          [
+            "create",
+            "import",
+            "balance",
+            "transactions",
+            "generateAddress",
+          ].includes(answers.action),
+      },
+      {
+        type: "input",
+        name: "mnemonic",
+        message: "Enter the mnemonic phrase:",
+        when: (answers) => answers.action === "import",
+      },
+    ]);
+
+    // Execute the corresponding action
+    switch (answers.action) {
+      case "create":
+        this.log(`Creating wallet: ${answers.walletName}`);
+        await createWallet(answers.walletName);
+        break;
+      case "import":
+        this.log(`Importing wallet: ${answers.walletName}`);
+        await importWallet(answers.walletName, answers.mnemonic);
+        break;
+      case "list":
+        this.log("Listing all wallets...");
+        await listWallets();
+        break;
+      case "balance":
+        this.log(`Getting balance for wallet: ${answers.walletName}`);
+        await getBalance(answers.walletName);
+        break;
+      case "transactions":
+        this.log(`Getting transactions for wallet: ${answers.walletName}`);
+        await getTransactions(answers.walletName);
+        break;
+      case "generateAddress":
+        this.log(`Generating address for wallet: ${answers.walletName}`);
+        await generateAddress(answers.walletName);
+        break;
+      default:
+        this.log("Unknown action selected.");
     }
   }
 }
